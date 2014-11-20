@@ -6,7 +6,7 @@
 /*   By: alegent <alegent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/08 16:01:39 by alegent           #+#    #+#             */
-/*   Updated: 2014/11/08 17:37:14 by alegent          ###   ########.fr       */
+/*   Updated: 2014/11/14 18:42:25 by alegent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ char			**ft_strsplit(const char *s, char c)
 	int		i;
 	int		x;
 
+	if (s == NULL)
+		return (NULL);
 	i = 0;
 	if (!(tab = (char **)malloc(sizeof(char*) * (count_words(s, c) + 1))))
 		return (NULL);
@@ -66,8 +68,7 @@ char			**ft_strsplit(const char *s, char c)
 				return (NULL);
 			while (*s != c && *s && ft_isprint(*s))
 				tab[i][x++] = *s++;
-			tab[i][x] = '\0';
-			i++;
+			tab[i++][x] = '\0';
 		}
 	}
 	tab[i] = 0;

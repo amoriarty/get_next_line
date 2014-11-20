@@ -3,68 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alegent <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: alegent <alegent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/03 17:42:46 by alegent           #+#    #+#             */
-/*   Updated: 2014/11/08 17:38:30 by alegent          ###   ########.fr       */
+/*   Created: 2014/11/14 17:50:50 by alegent           #+#    #+#             */
+/*   Updated: 2014/11/14 18:00:25 by alegent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		ft_digitlen(const char *str)
+static int	ft_trim(char c)
 {
-	int		i;
-	int		res;
-
-	i = 0;
-	res = 0;
-	if (str[i] == '-' || str[i] == '+')
-		i++;
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		res++;
-		i++;
-	}
-	if (str[res] == '0')
-		res++;
-	return (res);
+	if (c == ' ' || c == '\t' || c == '\f' || c == '\v' || c == '\r'
+			|| c == '\n')
+		return (TRUE);
+	return (FALSE);
 }
 
-static int		ft_power(int digitlen)
+int			ft_atoi(const char *str)
 {
-	int		i;
 	int		res;
-
-	i = 1;
-	res = 1;
-	while (i < digitlen)
-	{
-		res *= 10;
-		i++;
-	}
-	return (res);
-}
-
-int				ft_atoi(const char *str)
-{
 	int		i;
-	int		digitlen;
-	int		res;
+	int		sign;
 
-	i = 0;
-	str = ft_strtrim(str);
-	digitlen = ft_digitlen(str);
+	sign = 1;
 	res = 0;
+	i = 0;
+	while (ft_trim(str[i]) && str[i])
+		i++;
 	if (str[i] == '-' || str[i] == '+')
 		i++;
-	while (str[i] >= '0' && str[i] <= '9')
+	if (str[i - 1] == '-')
+		sign = -1;
+	while (str[i])
 	{
-		res += (str[i] - '0') * ft_power(digitlen);
+		if (str[i] < '0' || str[i] > '9')
+			return (res * sign);
+		res = res * 10 + (str[i] - '0');
 		i++;
-		digitlen--;
 	}
-	if (str[0] == '-')
-		res = -res;
-	return (res);
+	return (res * sign);
 }

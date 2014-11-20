@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alegent <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: alegent <alegent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/03 18:13:48 by alegent           #+#    #+#             */
-/*   Updated: 2014/11/03 18:13:51 by alegent          ###   ########.fr       */
+/*   Created: 2014/11/13 13:57:41 by alegent           #+#    #+#             */
+/*   Updated: 2014/11/17 16:48:28 by alegent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "libft.h"
 
 char		*ft_strncat(char *s1, const char *s2, size_t n)

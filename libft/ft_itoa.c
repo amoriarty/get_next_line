@@ -6,7 +6,7 @@
 /*   By: alegent <alegent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/05 17:37:30 by alegent           #+#    #+#             */
-/*   Updated: 2014/11/07 17:02:40 by alegent          ###   ########.fr       */
+/*   Updated: 2014/11/19 11:57:05 by alegent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ char			*ft_itoa(int n)
 	char	*itoa;
 
 	isneg = FALSE;
+	if (n == -2147483648)
+		return ("-2147483648");
 	if (n == 0)
 		return ("0");
 	if (n < 0)
@@ -44,13 +46,11 @@ char			*ft_itoa(int n)
 	}
 	digitlen = ft_digitlen(n) + isneg;
 	itoa = ft_strnew(digitlen);
-	itoa[digitlen] = '\0';
-	digitlen--;
+	itoa[digitlen--] = '\0';
 	while (n != 0)
 	{
-		itoa[digitlen] = (n % 10) + '0';
+		itoa[digitlen--] = (n % 10) + '0';
 		n /= 10;
-		digitlen--;
 	}
 	if (isneg == TRUE)
 		itoa[digitlen] = '-';

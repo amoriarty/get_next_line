@@ -6,10 +6,11 @@
 /*   By: alegent <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/05 16:48:53 by alegent           #+#    #+#             */
-/*   Updated: 2014/11/05 16:52:38 by alegent          ###   ########.fr       */
+/*   Updated: 2014/11/20 11:07:58 by alegent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "libft.h"
 
 char		*ft_strjoin(char const *s1, char const *s2)
@@ -20,8 +21,7 @@ char		*ft_strjoin(char const *s1, char const *s2)
 
 	i = 0;
 	x = 0;
-	res = ft_strnew(ft_strlen(s1) + ft_strlen(s2));
-	if (res == NULL)
+	if ((res = ft_strnew(ft_strlen(s1) + ft_strlen(s2))) == NULL)
 		return (NULL);
 	while (s1[i] != '\0')
 	{

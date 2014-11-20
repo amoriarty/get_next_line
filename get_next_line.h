@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alegent <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: alegent <alegent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/04 18:23:17 by alegent           #+#    #+#             */
-/*   Updated: 2014/11/17 16:28:45 by alegent          ###   ########.fr       */
+/*   Created: 2014/11/13 11:29:19 by alegent           #+#    #+#             */
+/*   Updated: 2014/11/19 15:21:33 by alegent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "libft.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+# define EOL '\n'
+# define TRUE 1
+# define FALSE 0
+# define ERROR -1
+# define BUFF_SIZE 32
 
-void		ft_bzero(void *s, size_t n)
-{
-	size_t		i;
+int		get_next_line(const int fd, char **line);
 
-	i = 0;
-	while (i < n)
-	{
-		*(char *)s = 0;
-		s++;
-		i++;
-	}
-}
+#endif

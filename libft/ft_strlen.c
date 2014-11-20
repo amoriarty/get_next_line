@@ -6,11 +6,11 @@
 /*   By: alegent <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/03 12:23:31 by alegent           #+#    #+#             */
-/*   Updated: 2014/11/03 15:24:37 by alegent          ###   ########.fr       */
+/*   Updated: 2014/11/17 16:47:22 by alegent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include <stdlib.h>
 #include "libft.h"
 
 size_t		ft_strlen(const char *s)
