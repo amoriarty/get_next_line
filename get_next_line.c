@@ -6,7 +6,7 @@
 /*   By: alegent <alegent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/18 15:53:47 by alegent           #+#    #+#             */
-/*   Updated: 2014/11/20 13:14:02 by alegent          ###   ########.fr       */
+/*   Updated: 2014/11/20 15:02:11 by alegent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int				get_next_line(const int fd, char **line)
 		{
 			printf("line = %s\n", *line);
 			*line = ft_strjoin(*line, too_much);
-			printf("line = %s\n", *line);
+			printf("line 2 = %s\n", *line);
 			ft_strdel(&too_much);
 		}
 		while ((ret = read(fd, buffer, BUFF_SIZE + 1)))
