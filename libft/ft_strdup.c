@@ -6,7 +6,7 @@
 /*   By: alegent <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/03 15:34:31 by alegent           #+#    #+#             */
-/*   Updated: 2014/11/20 13:09:25 by alegent          ###   ########.fr       */
+/*   Updated: 2014/11/20 16:18:34 by alegent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ char		*ft_strdup(const char *s1)
 	len = ft_strlen(s1);
 	if ((s2 = ft_strnew(len)) == NULL || s1 == NULL)
 			return (NULL);
-	while (!s1)
+	while (i < len)
 	{
-		s2[i++] = *s1;
-		s1++;
+		s2[i] = s1[i];
+		i++;
 	}
 	return (s2);
 }
