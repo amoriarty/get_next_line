@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: alegent <alegent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/21 13:51:06 by alegent           #+#    #+#             */
-/*   Updated: 2014/11/24 15:16:07 by alegent          ###   ########.fr       */
+/*   Created: 2014/11/26 17:19:47 by alegent           #+#    #+#             */
+/*   Updated: 2014/11/26 17:34:01 by alegent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,40 +14,63 @@
 #include "libft.h"
 #include "get_next_line.h"
 
-static int		ft_static(char ***line, char **too, char **tmp)
-{
-	if (*too && (*tmp = ft_strchr(*too, EOL)))
-	{
-		**line = ft_strsub(*too, 0, ft_strlen(*too) - ft_strlen(*tmp));
-		*too = ft_strchr(*too, EOL) + 1;
-		return (TRUE);
-	}
-	return (FALSE);
-}
-
-int				get_next_line(const int fd, char **line)
+static int				text_copy(int const fd, char **line)
 {
 	int				ret;
-	char			buffer[BUFF_SIZE + 1];
 	char			*tmp;
-	static char		*too;
+	char			buffer[BUFF_SIZE + 1];
 
-	if (fd != -1 || !line)
+	ret = -2;
+	tmp = NULL;
+	while ((!ft_strchr(*line, EOL)))
 	{
-		if (ft_static(&line, &too, &tmp) == TRUE)
-			return (1);
-		while ((ret = read(fd, buffer, BUFF_SIZE)))
-		{
-			buffer[ret] = '\0';
-			too = ft_strjoin(too, buffer);
-			if ((tmp = ft_strchr(too, EOL)))
-			{
-				*line = ft_strsub(too, 0, ft_strlen(too) - ft_strlen(tmp));
-				too = ft_strchr(too, EOL) + 1;
-				return (1);
-			}
-		}
-		return (0);
+		if ((ret = read(fd, buffer, BUFF_SIZE)) <= 0)
+			return (ret);
+		tmp = *line;
+		buffer[ret] = 0;
+		if (!(*line = ft_strjoin(*line, buffer)))
+			return (ERROR);
+		ft_strdel(&tmp);
+		if (ret < BUFF_SIZE)
+			return (ret);
 	}
-	return (ERROR);
+	return (ret);
+}
+
+static char				*get_line(char *offset, char **line)
+{
+	char			*tmp;
+	char			*del;
+
+	del = offset;
+	if (offset && (tmp = ft_strchr(offset, EOL)))
+	{
+		*line = ft_strsub(offset, 0, ft_strlen(offset) - ft_strlen(tmp));
+		offset = ft_strdup(tmp + 1);
+		ft_strdel(&del);
+	}
+	else
+	{
+		*line = ft_strdup(offset);
+		ft_strclr(offset);
+	}
+	return (offset);
+}
+
+int						get_next_line(int const fd, char **line)
+{
+	int				ret;
+	static char		*offset;
+
+	if (!line)
+		return (ERROR);
+	if (!offset)
+		offset = ft_strnew(0);
+	if ((ret = text_copy(fd, &offset)) == ERROR)
+		return (ERROR);
+	offset = get_line(offset, line);
+	if ((!ret && !ft_strlen(offset) && !ft_strlen(*line)))
+		return (0);
+	else
+		return (1);
 }
